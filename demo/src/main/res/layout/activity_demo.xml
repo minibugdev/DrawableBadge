@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageViewBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="48dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <Button
+        android:id="@+id/buttonTopLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top Left" />
+
+    <Button
+        android:id="@+id/buttonTopRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top Right" />
+
+    <Button
+        android:id="@+id/buttonBottomLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bottom Left" />
+
+    <Button
+        android:id="@+id/buttonBottomRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bottom Right" />
+
+    <Button
+        android:id="@+id/buttonReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset" />
+</LinearLayout>
