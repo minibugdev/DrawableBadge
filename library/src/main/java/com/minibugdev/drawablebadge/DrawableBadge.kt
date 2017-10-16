@@ -1,4 +1,4 @@
-package com.trydroid.drawablebadge
+package com.minibugdev.drawablebadge
 
 import android.content.Context
 import android.graphics.*
