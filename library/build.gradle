@@ -2,7 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 
-group='com.github.minibugdev'
+group='com.trydroid'
+version = '1.0.0'
 
 android {
     compileSdkVersion 26
