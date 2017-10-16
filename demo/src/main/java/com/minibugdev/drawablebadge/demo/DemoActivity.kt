@@ -1,9 +1,9 @@
-package com.trydroid.drawablebadge.demo
+package com.minibugdev.drawablebadge.demo
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.trydroid.drawablebadge.BadgePosition
-import com.trydroid.drawablebadge.DrawableBadge
+import com.minibugdev.drawablebadge.BadgePosition
+import com.minibugdev.drawablebadge.DrawableBadge
 import kotlinx.android.synthetic.main.activity_demo.*
 
 class DemoActivity : AppCompatActivity() {
