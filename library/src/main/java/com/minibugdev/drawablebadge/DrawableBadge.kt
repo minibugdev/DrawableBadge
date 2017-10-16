@@ -20,7 +20,7 @@ class DrawableBadge private constructor(private val context: Context,
                                         private val badgeSize: Float,
                                         private val badgePosition: BadgePosition,
                                         private val bitmap: Bitmap,
-										private val isShowBorder: Boolean) {
+					private val isShowBorder: Boolean) {
 
 	class Builder(private val context: Context) {
 
@@ -54,7 +54,10 @@ class DrawableBadge private constructor(private val context: Context,
 			this.badgeBorderSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.getDisplayMetrics());
 		}
 
-		fun badgeSize(@DimenRes badgeSize: Int) = apply { this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize).toFloat() }
+		fun badgeSize(@DimenRes badgeSize: Int) = apply {
+			val dp = context.resources.getDimensionPixelOffset(badgeSize).toFloat()
+			this.badgeSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.getDisplayMetrics());
+		}
 
 		fun badgePosition(badgePosition: BadgePosition) = apply { this.badgePosition = badgePosition }
 
