@@ -10,30 +10,36 @@ Drawable Badge is a android library for adding badges to drawables.
 Generate drawable with badge
 ``` kotlin
 val drawable = DrawableBadge.Builder(context)
-			.drawableResId(R.mipmap.ic_launcher_round)
-			.badgeColor(R.color.badgeColor)
-			.badgeSize(R.dimen.badge_size)
-			.badgePosition(BadgePosition.TOP_RIGHT)
-			.textColor(R.color.textColor)
-			.build()
-			.get(99)
+    .drawableResId(R.mipmap.ic_launcher_round)
+    .badgeColor(R.color.badgeColor)
+    .badgeSize(R.dimen.badge_size)
+    .badgePosition(BadgePosition.TOP_RIGHT)
+    .textColor(R.color.textColor)
+    .build()
+    .get(99)
 ```
 Apply to image view.
 ``` kotlin
 imageViewBadge.setImageDrawable(drawable) 
 ```
 
+## Customize
+- `drawableResId`: Drawable resource id to added badges.
+- `drawable`: Drawable to added badges.
+- `bitmap`: Bitmap  to added badges.
+- `textColor`: Badge text color resource id, default `#FFFFFF`.
+- `badgeColor`: Badge color resource id , default `#FF0000`.
+- `badgeSize`: Badge size dimension id, default `16dp`.
+- `badgePosition`: Position of Badge which need to added. (`TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_RIGHT`, `BOTTOM_LEFT`), default `TOP_RIGHT`.
+
 ## Download
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
+``` groovy
+repositories {
+    maven { url 'https://jitpack.io' }
 }
 ```
 
-```
+``` groovy
 compile 'com.github.minibugdev:drawablebadge:1.0.0'
 ```
 
