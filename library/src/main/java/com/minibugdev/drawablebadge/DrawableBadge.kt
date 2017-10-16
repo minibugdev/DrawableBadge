@@ -14,6 +14,7 @@ import android.text.TextPaint
 class DrawableBadge private constructor(private val context: Context,
                                         @ColorInt private val textColor: Int,
                                         @ColorInt private val badgeColor: Int,
+                                        @ColorInt private val badgeBorderColor: Int,
                                         private val badgeSize: Float,
                                         private val badgePosition: BadgePosition,
                                         private val bitmap: Bitmap) {
@@ -22,6 +23,7 @@ class DrawableBadge private constructor(private val context: Context,
 
 		@ColorInt private var textColor: Int? = null
 		@ColorInt private var badgeColor: Int? = null
+		@ColorInt private var badgeBorderColor: Int? = null
 		private var badgeSize: Float? = null
 		private var badgePosition: BadgePosition? = null
 		private var bitmap: Bitmap? = null
@@ -40,6 +42,8 @@ class DrawableBadge private constructor(private val context: Context,
 
 		fun badgeColor(@ColorRes badgeColorRes: Int) = apply { this.badgeColor = ContextCompat.getColor(context, badgeColorRes) }
 
+		fun badgeBorderColor(@ColorRes badgeBorderColorRes: Int) = apply { this.badgeBorderColor = ContextCompat.getColor(context, badgeBorderColorRes) }
+
 		fun badgeSize(@DimenRes badgeSize: Int) = apply { this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize).toFloat() }
 
 		fun badgePosition(badgePosition: BadgePosition) = apply { this.badgePosition = badgePosition }
@@ -49,6 +53,7 @@ class DrawableBadge private constructor(private val context: Context,
 			if (badgeSize == null) badgeSize(R.dimen.default_badge_size)
 			if (textColor == null) textColor(R.color.default_badge_text_color)
 			if (badgeColor == null) badgeColor(R.color.default_badge_color)
+			if (badgeBorderColor == null) badgeBorderColor(R.color.default_badge_border_color)
 			if (badgePosition == null) badgePosition(BadgePosition.TOP_RIGHT)
 
 			return DrawableBadge(
@@ -56,6 +61,7 @@ class DrawableBadge private constructor(private val context: Context,
 				bitmap = bitmap!!,
 				textColor = textColor!!,
 				badgeColor = badgeColor!!,
+				badgeBorderColor = badgeBorderColor!!,
 				badgeSize = badgeSize!!,
 				badgePosition = badgePosition!!)
 		}
@@ -88,6 +94,16 @@ class DrawableBadge private constructor(private val context: Context,
 			BadgePosition.BOTTOM_RIGHT -> RectF(width.toFloat() - badgeSize, height.toFloat() - badgeSize, width.toFloat(), height.toFloat())
 		}
 		canvas.drawOval(badgeRect, paint)
+
+		val paintBorder = Paint().apply {
+			isAntiAlias = true
+			isFilterBitmap = true
+			isDither = true
+			textAlign = Paint.Align.CENTER
+			color = badgeBorderColor
+			style = Paint.Style.STROKE
+		}
+		canvas.drawOval(badgeRect, paintBorder)
 
 		val textSize = badgeRect.height() * 0.55f
 		val textPaint = TextPaint().apply {
