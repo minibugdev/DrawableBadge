@@ -1,0 +1,2 @@
+before_install:
+  - gradle :wrapper --configure-on-demand
