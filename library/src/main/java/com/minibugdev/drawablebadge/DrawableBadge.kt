@@ -20,7 +20,7 @@ class DrawableBadge private constructor(private val context: Context,
                                         private val badgeSize: Float,
                                         private val badgePosition: BadgePosition,
                                         private val bitmap: Bitmap,
-					private val isShowBorder: Boolean) {
+					 private val isShowBorder: Boolean) {
 
 	class Builder(private val context: Context) {
 
