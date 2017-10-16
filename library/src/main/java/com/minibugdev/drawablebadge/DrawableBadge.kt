@@ -4,9 +4,13 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.support.annotation.*
+import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.annotation.DimenRes
+import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.text.TextPaint
+import android.util.TypedValue
 
 class DrawableBadge private constructor(private val context: Context,
                                         @ColorInt private val textColor: Int,
@@ -43,7 +47,10 @@ class DrawableBadge private constructor(private val context: Context,
 
 		fun badgeBorderColor(@ColorRes badgeBorderColorRes: Int) = apply { this.badgeBorderColor = ContextCompat.getColor(context, badgeBorderColorRes) }
 
-		fun badgeBorderSize(@IntegerRes badgeBorderSize: Int) = apply { this.badgeBorderSize = context.resources.getInteger(badgeBorderSize).toFloat() }
+		fun badgeBorderSize(@DimenRes badgeBorderSize: Int) = apply {
+			val dp = context.resources.getDimensionPixelOffset(badgeBorderSize).toFloat()
+			this.badgeBorderSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.getDisplayMetrics());
+		}
 
 		fun badgeSize(@DimenRes badgeSize: Int) = apply { this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize).toFloat() }
 
@@ -55,7 +62,7 @@ class DrawableBadge private constructor(private val context: Context,
 			if (textColor == null) textColor(R.color.default_badge_text_color)
 			if (badgeColor == null) badgeColor(R.color.default_badge_color)
 			if (badgeBorderColor == null) badgeBorderColor(R.color.default_badge_border_color)
-			if (badgeBorderSize == null) badgeBorderSize(R.integer.default_badge_border_size)
+			if (badgeBorderSize == null) badgeBorderSize(R.dimen.default_badge_border_size)
 			if (badgePosition == null) badgePosition(BadgePosition.TOP_RIGHT)
 
 			return DrawableBadge(
