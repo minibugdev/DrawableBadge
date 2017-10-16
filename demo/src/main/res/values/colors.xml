@@ -6,4 +6,5 @@
 
     <color name="badgeColor">#FF0000</color>
     <color name="textColor">#FFFFFF</color>
+    <color name="borderColor">#FFFFFF</color>
 </resources>

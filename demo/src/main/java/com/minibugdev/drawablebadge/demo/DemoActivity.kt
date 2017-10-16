@@ -29,6 +29,9 @@ class DemoActivity : AppCompatActivity() {
 			.badgeSize(R.dimen.badge_size)
 			.badgePosition(position)
 			.textColor(R.color.textColor)
+			.showBorder(true)
+			.badgeBorderColor(R.color.borderColor)
+			.badgeBorderSize(R.dimen.badge_border_size)
 			.build()
 			.get(number)
 			.let { drawable -> imageViewBadge.setImageDrawable(drawable) }
