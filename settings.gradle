@@ -1,2 +1,2 @@
-include ':demo', ':library'
-rootProject.name = 'DrawableBadge'
+include ':library'
+include ':demo'
