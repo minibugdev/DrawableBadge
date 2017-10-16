@@ -1,5 +1,5 @@
 # Drawable Badge
-[![Release](https://jitpack.io/v/minibugdev/DrawableBadge.svg)](https://jitpack.io/#minibugdev/DrawableBadge)
+[![Release](https://jitpack.io/v/minibugdev/DrawableBadge.svg)](https://jitpack.io/#minibugdev/DrawableBadge/1.0.1)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/minibugdev/DrawableBadge/master/LICENSE)
 
 Drawable Badge is a android library for adding badges to drawables.
@@ -12,11 +12,12 @@ Generate drawable with badge
 val drawable = DrawableBadge.Builder(context)
     .drawableResId(R.mipmap.ic_launcher_round)
     .badgeColor(R.color.badgeColor)
-    .badgeBorderColor(R.color.badgeBorderColor)
-    .badgeBorderSize(R.dimen.badge_border_size)
     .badgeSize(R.dimen.badge_size)
     .badgePosition(BadgePosition.TOP_RIGHT)
     .textColor(R.color.textColor)
+    .showBorder(true)
+    .badgeBorderColor(R.color.badgeBorderColor)
+    .badgeBorderSize(R.dimen.badge_border_size)
     .build()
     .get(99)
 ```
@@ -31,10 +32,11 @@ imageViewBadge.setImageDrawable(drawable)
 - `bitmap`: Bitmap  to added badges.
 - `textColor`: Badge text color resource id, default `#FFFFFF`.
 - `badgeColor`: Badge color resource id , default `#FF0000`.
-- `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
-- `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.
 - `badgeSize`: Badge size dimension id, default `16dp`.
 - `badgePosition`: Position of Badge which need to added. (`TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_RIGHT`, `BOTTOM_LEFT`), default `TOP_RIGHT`.
+- `showBorder`: Set show/hide badge border, default `true`.
+- `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
+- `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.
 
 ## Download
 ``` groovy
@@ -44,7 +46,7 @@ repositories {
 ```
 
 ``` groovy
-compile 'com.github.minibugdev:drawablebadge:1.0.0'
+compile 'com.github.minibugdev:drawablebadge:1.0.1'
 ```
 
 
