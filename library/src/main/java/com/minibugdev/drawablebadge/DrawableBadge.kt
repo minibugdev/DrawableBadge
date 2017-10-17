@@ -11,15 +11,15 @@ import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.text.TextPaint
 
-class DrawableBadge private constructor(private val context: Context,
-                                        @ColorInt private val textColor: Int,
-                                        @ColorInt private val badgeColor: Int,
-                                        @ColorInt private val badgeBorderColor: Int,
-                                        private val badgeBorderSize: Float,
-                                        private val badgeSize: Float,
-                                        private val badgePosition: BadgePosition,
-                                        private val bitmap: Bitmap,
-                                        private val isShowBorder: Boolean) {
+class DrawableBadge private constructor(val context: Context,
+                                        @ColorInt val textColor: Int,
+                                        @ColorInt val badgeColor: Int,
+                                        @ColorInt val badgeBorderColor: Int,
+                                        val badgeBorderSize: Float,
+                                        val badgeSize: Float,
+                                        val badgePosition: BadgePosition,
+                                        val bitmap: Bitmap,
+                                        val isShowBorder: Boolean) {
 
 	class Builder(private val context: Context) {
 
