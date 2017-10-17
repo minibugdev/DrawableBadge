@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 
-group='com.github.minibugdev'
+group = 'com.github.minibugdev'
 
 android {
     compileSdkVersion 26
@@ -13,6 +13,7 @@ android {
         targetSdkVersion 26
         versionCode 2
         versionName "1.0.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -22,12 +23,23 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile "com.android.support:appcompat-v7:$support_library_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    androidTestCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    androidTestCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    androidTestCompile "com.nhaarman:mockito-kotlin-kt1.1:$mockito_version"
+    androidTestCompile "org.mockito:mockito-android:2.11.0"
+    androidTestCompile "com.android.support:support-annotations:$support_library_version"
+    androidTestCompile "com.android.support.test:runner:$test_runner_version"
 }
 
 // build a jar with source files
@@ -37,7 +49,7 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-    failOnError  false
+    failOnError false
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     classpath += configurations.compile
