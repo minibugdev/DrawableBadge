@@ -1,5 +1,5 @@
 # Drawable Badge
-[![CircleCI](https://circleci.com/gh/minibugdev/DrawableBadge.svg?style=svg)](https://circleci.com/gh/minibugdev/DrawableBadge)
+[![CircleCI](https://circleci.com/gh/minibugdev/DrawableBadge.svg?style=shield)](https://circleci.com/gh/minibugdev/DrawableBadge)
 [![Release](https://jitpack.io/v/minibugdev/DrawableBadge.svg)](https://jitpack.io/#minibugdev/DrawableBadge/1.0.1)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/minibugdev/DrawableBadge/master/LICENSE)
 
