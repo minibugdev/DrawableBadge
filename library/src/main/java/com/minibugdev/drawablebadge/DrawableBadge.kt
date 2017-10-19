@@ -9,6 +9,7 @@ import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.text.TextPaint
 
 class DrawableBadge private constructor(val context: Context,
@@ -34,7 +35,17 @@ class DrawableBadge private constructor(val context: Context,
 		private var isShowBorder: Boolean? = null
 		private var maximumCounter: Int? = null
 
-		fun drawableResId(@DrawableRes drawableRes: Int) = apply { this.bitmap = BitmapFactory.decodeResource(context.resources, drawableRes) }
+		fun drawableResId(@DrawableRes drawableRes: Int) = apply {
+			val res = context.resources
+			bitmap = BitmapFactory.decodeResource(res, drawableRes)
+
+			if (bitmap == null) {
+				val d = ResourcesCompat.getDrawable(res, drawableRes, null)?.current
+				if (d is BitmapDrawable) {
+					bitmap = d.bitmap
+				}
+			}
+		}
 
 		fun drawable(drawable: Drawable) = apply {
 			if (drawable is BitmapDrawable) {
