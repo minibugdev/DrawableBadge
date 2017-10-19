@@ -50,6 +50,7 @@ class DrawableBadgeBuilderTest {
 		assertEquals(EXPECTED_DEFAULT_BADGE_TEXT_COLOR_INT, actual.textColor)
 		assertEquals(BadgePosition.TOP_RIGHT, actual.badgePosition)
 		assertEquals(true, actual.isShowBorder)
+		assertEquals(99, actual.maximumCounter)
 	}
 
 	@Test
@@ -69,6 +70,7 @@ class DrawableBadgeBuilderTest {
 			.textColor(FAKE_TEXT_COLOR_RES_ID)
 			.badgePosition(BadgePosition.BOTTOM_LEFT)
 			.showBorder(false)
+			.maximumCounter(50)
 			.build()
 
 		assertEquals(EXPECTED_CONFIG_BADGE_SIZE, actual.badgeSize)
@@ -78,6 +80,7 @@ class DrawableBadgeBuilderTest {
 		assertEquals(EXPECTED_CONFIG_BADGE_TEXT_COLOR_INT, actual.textColor)
 		assertEquals(BadgePosition.BOTTOM_LEFT, actual.badgePosition)
 		assertEquals(false, actual.isShowBorder)
+		assertEquals(50, actual.maximumCounter)
 	}
 
 	companion object {

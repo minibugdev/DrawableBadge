@@ -19,6 +19,7 @@ val drawable = DrawableBadge.Builder(context)
     .showBorder(true)
     .badgeBorderColor(R.color.badgeBorderColor)
     .badgeBorderSize(R.dimen.badge_border_size)
+    .maximumCounter(99)
     .build()
     .get(99)
 ```
@@ -38,6 +39,7 @@ imageViewBadge.setImageDrawable(drawable)
 - `showBorder`: Set show/hide badge border, default `true`.
 - `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
 - `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.
+- `maximumCounter`: Maximum counter text will append with `+`, default and not more than `99`.
 
 ## Download
 ``` groovy

@@ -19,7 +19,8 @@ class DrawableBadge private constructor(val context: Context,
                                         val badgeSize: Float,
                                         val badgePosition: BadgePosition,
                                         val bitmap: Bitmap,
-                                        val isShowBorder: Boolean) {
+                                        val isShowBorder: Boolean,
+                                        val maximumCounter: Int) {
 
 	class Builder(private val context: Context) {
 
@@ -31,6 +32,7 @@ class DrawableBadge private constructor(val context: Context,
 		private var badgePosition: BadgePosition? = null
 		private var bitmap: Bitmap? = null
 		private var isShowBorder: Boolean? = null
+		private var maximumCounter: Int? = null
 
 		fun drawableResId(@DrawableRes drawableRes: Int) = apply { this.bitmap = BitmapFactory.decodeResource(context.resources, drawableRes) }
 
@@ -56,6 +58,8 @@ class DrawableBadge private constructor(val context: Context,
 
 		fun showBorder(isShowBorder: Boolean) = apply { this.isShowBorder = isShowBorder }
 
+		fun maximumCounter(maximumCounter: Int) = apply { this.maximumCounter = maximumCounter }
+
 		fun build(): DrawableBadge {
 			if (bitmap == null) throw IllegalArgumentException("Badge drawable/bitmap can not be null.")
 			if (badgeSize == null) badgeSize(R.dimen.default_badge_size)
@@ -65,6 +69,7 @@ class DrawableBadge private constructor(val context: Context,
 			if (badgeBorderSize == null) badgeBorderSize(R.dimen.default_badge_border_size)
 			if (badgePosition == null) badgePosition(BadgePosition.TOP_RIGHT)
 			if (isShowBorder == null) showBorder(true)
+			if (maximumCounter == null) maximumCounter(DrawableBadge.MAXIMUM_COUNT)
 
 			return DrawableBadge(
 				context = context,
@@ -75,13 +80,14 @@ class DrawableBadge private constructor(val context: Context,
 				badgeBorderSize = badgeBorderSize!!,
 				badgeSize = badgeSize!!,
 				badgePosition = badgePosition!!,
-				isShowBorder = isShowBorder!!)
+				isShowBorder = isShowBorder!!,
+				maximumCounter = maximumCounter!!)
 		}
 	}
 
-	fun get(number: Int): Drawable {
+	fun get(counter: Int): Drawable {
 		val resources = context.resources
-		if (number == 0) return BitmapDrawable(resources, bitmap)
+		if (counter == 0) return BitmapDrawable(resources, bitmap)
 
 		val sourceBitmap = bitmap
 		val width = sourceBitmap.width
@@ -123,18 +129,32 @@ class DrawableBadge private constructor(val context: Context,
 			canvas.drawOval(badgeRect, paintBorder)
 		}
 
-		val textSize = badgeRect.height() * 0.55f
+		val textSize: Float
+		val text: String
+		val max = if (maximumCounter > MAXIMUM_COUNT) MAXIMUM_COUNT else maximumCounter
+		if (counter > max) {
+			textSize = badgeRect.height() * 0.45f
+			text = "$max+"
+		}
+		else {
+			textSize = badgeRect.height() * 0.55f
+			text = counter.toString()
+		}
+
 		val textPaint = TextPaint().apply {
 			this.isAntiAlias = true
 			this.color = textColor
 			this.textSize = textSize
 		}
 
-		val text = number.toString()
 		val x = badgeRect.centerX() - (textPaint.measureText(text) / 2f)
 		val y = badgeRect.centerY() - (textPaint.ascent() + textPaint.descent()) * 0.5f
 		canvas.drawText(text, x, y, textPaint)
 
 		return BitmapDrawable(resources, output)
+	}
+
+	companion object {
+		const val MAXIMUM_COUNT = 99
 	}
 }

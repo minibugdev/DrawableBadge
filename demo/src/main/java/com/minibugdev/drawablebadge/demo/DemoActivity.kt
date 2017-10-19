@@ -15,10 +15,10 @@ class DemoActivity : AppCompatActivity() {
 	}
 
 	private fun registerEvents() {
-		buttonTopLeft.setOnClickListener { drawBadge(99, BadgePosition.TOP_LEFT) }
-		buttonTopRight.setOnClickListener { drawBadge(99, BadgePosition.TOP_RIGHT) }
+		buttonTopLeft.setOnClickListener { drawBadge(1, BadgePosition.TOP_LEFT) }
+		buttonTopRight.setOnClickListener { drawBadge(50, BadgePosition.TOP_RIGHT) }
 		buttonBottomLeft.setOnClickListener { drawBadge(99, BadgePosition.BOTTOM_LEFT) }
-		buttonBottomRight.setOnClickListener { drawBadge(99, BadgePosition.BOTTOM_RIGHT) }
+		buttonBottomRight.setOnClickListener { drawBadge(100, BadgePosition.BOTTOM_RIGHT) }
 		buttonReset.setOnClickListener { drawBadge(0, BadgePosition.TOP_LEFT) }
 	}
 
@@ -32,6 +32,7 @@ class DemoActivity : AppCompatActivity() {
 			.showBorder(true)
 			.badgeBorderColor(R.color.borderColor)
 			.badgeBorderSize(R.dimen.badge_border_size)
+			.maximumCounter(99)
 			.build()
 			.get(number)
 			.let { drawable -> imageViewBadge.setImageDrawable(drawable) }
