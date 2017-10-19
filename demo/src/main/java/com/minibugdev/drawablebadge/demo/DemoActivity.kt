@@ -24,7 +24,7 @@ class DemoActivity : AppCompatActivity() {
 
 	private fun drawBadge(number: Int, position: BadgePosition) {
 		DrawableBadge.Builder(applicationContext)
-			.drawableResId(R.mipmap.ic_launcher)
+			.drawableResId(R.drawable.selector_badge)
 			.badgeColor(R.color.badgeColor)
 			.badgeSize(R.dimen.badge_size)
 			.badgePosition(position)
