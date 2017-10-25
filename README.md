@@ -25,18 +25,18 @@ val drawable = DrawableBadge.Builder(context)
 ```
 Apply to image view.
 ``` kotlin
-imageViewBadge.setImageDrawable(drawable) 
+imageViewBadge.setImageDrawable(drawable)
 ```
 
 ## Customize
 - `drawableResId`: Drawable resource id to added badges.
 - `drawable`: Drawable to added badges.
-- `bitmap`: Bitmap  to added badges.
+- `bitmap`: Bitmap to added badges.
 - `textColor`: Badge text color resource id, default `#FFFFFF`.
 - `badgeColor`: Badge color resource id , default `#FF0000`.
 - `badgeSize`: Badge size dimension id, default `16dp`.
 - `badgePosition`: Position of Badge which need to added. (`TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_RIGHT`, `BOTTOM_LEFT`), default `TOP_RIGHT`.
-- `showBorder`: Set show/hide badge border, default `true`.
+- `showBorder`: Set visible of badge border, default `true`.
 - `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
 - `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.
 - `maximumCounter`: Maximum counter text will append with `+`, default and not more than `99`.
@@ -75,5 +75,5 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 ```
