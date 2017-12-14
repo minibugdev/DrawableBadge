@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
@@ -35,6 +36,14 @@ class DrawableBadge private constructor(val context: Context,
 		private var isShowBorder: Boolean? = null
 		private var maximumCounter: Int? = null
 
+		private fun createBitmapFromVectorDrawable(vectorDrawable: VectorDrawable): Bitmap {
+			val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+			val canvas = Canvas(bitmap)
+			vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
+			vectorDrawable.draw(canvas)
+			return bitmap
+		}
+
 		fun drawableResId(@DrawableRes drawableRes: Int) = apply {
 			val res = context.resources
 			bitmap = BitmapFactory.decodeResource(res, drawableRes)
@@ -44,12 +53,18 @@ class DrawableBadge private constructor(val context: Context,
 				if (d is BitmapDrawable) {
 					bitmap = d.bitmap
 				}
+				if (d is VectorDrawable) {
+					bitmap = createBitmapFromVectorDrawable(d)
+				}
 			}
 		}
 
 		fun drawable(drawable: Drawable) = apply {
 			if (drawable is BitmapDrawable) {
 				this.bitmap = drawable.bitmap
+			}
+			if (drawable is VectorDrawable) {
+				this.bitmap = createBitmapFromVectorDrawable(drawable)
 			}
 		}
 
