@@ -15,15 +15,15 @@ import android.support.v4.content.res.ResourcesCompat
 import android.text.TextPaint
 
 class DrawableBadge private constructor(val context: Context,
-										@ColorInt val textColor: Int,
-										@ColorInt val badgeColor: Int,
-										@ColorInt val badgeBorderColor: Int,
-										val badgeBorderSize: Float,
-										val badgeSize: Float,
-										val badgePosition: BadgePosition,
-										val bitmap: Bitmap,
-										val isShowBorder: Boolean,
-										val maximumCounter: Int) {
+					@ColorInt val textColor: Int,
+					@ColorInt val badgeColor: Int,
+					@ColorInt val badgeBorderColor: Int,
+					val badgeBorderSize: Float,
+					val badgeSize: Float,
+					val badgePosition: BadgePosition,
+					val bitmap: Bitmap,
+					val isShowBorder: Boolean,
+					val maximumCounter: Int) {
 
 	class Builder(private val context: Context) {
 
@@ -113,16 +113,16 @@ class DrawableBadge private constructor(val context: Context,
 			if (maximumCounter == null) maximumCounter(DrawableBadge.MAXIMUM_COUNT)
 
 			return DrawableBadge(
-					context = context,
-					bitmap = bitmap!!,
-					textColor = textColor!!,
-					badgeColor = badgeColor!!,
-					badgeBorderColor = badgeBorderColor!!,
-					badgeBorderSize = badgeBorderSize!!,
-					badgeSize = badgeSize!!,
-					badgePosition = badgePosition!!,
-					isShowBorder = isShowBorder!!,
-					maximumCounter = maximumCounter!!)
+				context = context,
+				bitmap = bitmap!!,
+				textColor = textColor!!,
+				badgeColor = badgeColor!!,
+				badgeBorderColor = badgeBorderColor!!,
+				badgeBorderSize = badgeBorderSize!!,
+				badgeSize = badgeSize!!,
+				badgePosition = badgePosition!!,
+				isShowBorder = isShowBorder!!,
+				maximumCounter = maximumCounter!!)
 		}
 	}
 
