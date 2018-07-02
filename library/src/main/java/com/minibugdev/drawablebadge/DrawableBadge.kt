@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.InsetDrawable
 import android.graphics.drawable.VectorDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
@@ -14,15 +15,15 @@ import android.support.v4.content.res.ResourcesCompat
 import android.text.TextPaint
 
 class DrawableBadge private constructor(val context: Context,
-                                        @ColorInt val textColor: Int,
-                                        @ColorInt val badgeColor: Int,
-                                        @ColorInt val badgeBorderColor: Int,
-                                        val badgeBorderSize: Float,
-                                        val badgeSize: Float,
-                                        val badgePosition: BadgePosition,
-                                        val bitmap: Bitmap,
-                                        val isShowBorder: Boolean,
-                                        val maximumCounter: Int) {
+										@ColorInt val textColor: Int,
+										@ColorInt val badgeColor: Int,
+										@ColorInt val badgeBorderColor: Int,
+										val badgeBorderSize: Float,
+										val badgeSize: Float,
+										val badgePosition: BadgePosition,
+										val bitmap: Bitmap,
+										val isShowBorder: Boolean,
+										val maximumCounter: Int) {
 
 	class Builder(private val context: Context) {
 
@@ -44,6 +45,14 @@ class DrawableBadge private constructor(val context: Context,
 			return bitmap
 		}
 
+		private fun createBitmapFromInsetDrawable(insetDrawable: InsetDrawable): Bitmap {
+			val bitmap = Bitmap.createBitmap(insetDrawable.intrinsicWidth, insetDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+			val canvas = Canvas(bitmap)
+			insetDrawable.setBounds(0, 0, canvas.width, canvas.height)
+			insetDrawable.draw(canvas)
+			return bitmap
+		}
+
 		fun drawableResId(@DrawableRes drawableRes: Int) = apply {
 			val res = context.resources
 			bitmap = BitmapFactory.decodeResource(res, drawableRes)
@@ -56,6 +65,9 @@ class DrawableBadge private constructor(val context: Context,
 				if (d is VectorDrawable) {
 					bitmap = createBitmapFromVectorDrawable(d)
 				}
+				if (d is InsetDrawable) {
+					bitmap = createBitmapFromInsetDrawable(d)
+				}
 			}
 		}
 
@@ -65,6 +77,9 @@ class DrawableBadge private constructor(val context: Context,
 			}
 			if (drawable is VectorDrawable) {
 				this.bitmap = createBitmapFromVectorDrawable(drawable)
+			}
+			if (drawable is InsetDrawable) {
+				this.bitmap = createBitmapFromInsetDrawable(drawable)
 			}
 		}
 
@@ -98,16 +113,16 @@ class DrawableBadge private constructor(val context: Context,
 			if (maximumCounter == null) maximumCounter(DrawableBadge.MAXIMUM_COUNT)
 
 			return DrawableBadge(
-				context = context,
-				bitmap = bitmap!!,
-				textColor = textColor!!,
-				badgeColor = badgeColor!!,
-				badgeBorderColor = badgeBorderColor!!,
-				badgeBorderSize = badgeBorderSize!!,
-				badgeSize = badgeSize!!,
-				badgePosition = badgePosition!!,
-				isShowBorder = isShowBorder!!,
-				maximumCounter = maximumCounter!!)
+					context = context,
+					bitmap = bitmap!!,
+					textColor = textColor!!,
+					badgeColor = badgeColor!!,
+					badgeBorderColor = badgeBorderColor!!,
+					badgeBorderSize = badgeBorderSize!!,
+					badgeSize = badgeSize!!,
+					badgePosition = badgePosition!!,
+					isShowBorder = isShowBorder!!,
+					maximumCounter = maximumCounter!!)
 		}
 	}
 
