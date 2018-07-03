@@ -5,12 +5,12 @@ apply plugin: 'kotlin-android'
 group = 'com.github.minibugdev'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 4
         versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,15 +31,15 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_library_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    androidTestCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    androidTestCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    androidTestCompile "com.nhaarman:mockito-kotlin-kt1.1:$mockito_version"
-    androidTestCompile "org.mockito:mockito-android:2.11.0"
-    androidTestCompile "com.android.support:support-annotations:$support_library_version"
-    androidTestCompile "com.android.support.test:runner:$test_runner_version"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    androidTestImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
+    androidTestImplementation "com.android.support:support-annotations:$support_library_version"
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
 }
 
 // build a jar with source files
