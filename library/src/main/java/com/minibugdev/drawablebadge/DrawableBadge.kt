@@ -4,14 +4,13 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.InsetDrawable
-import android.graphics.drawable.VectorDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.TextPaint
 
 class DrawableBadge private constructor(val context: Context,
@@ -37,19 +36,11 @@ class DrawableBadge private constructor(val context: Context,
 		private var isShowBorder: Boolean? = null
 		private var maximumCounter: Int? = null
 
-		private fun createBitmapFromVectorDrawable(vectorDrawable: VectorDrawable): Bitmap {
-			val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+		private fun createBitmapFromDrawable(drawable: Drawable): Bitmap {
+			val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
 			val canvas = Canvas(bitmap)
-			vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-			vectorDrawable.draw(canvas)
-			return bitmap
-		}
-
-		private fun createBitmapFromInsetDrawable(insetDrawable: InsetDrawable): Bitmap {
-			val bitmap = Bitmap.createBitmap(insetDrawable.intrinsicWidth, insetDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-			val canvas = Canvas(bitmap)
-			insetDrawable.setBounds(0, 0, canvas.width, canvas.height)
-			insetDrawable.draw(canvas)
+			drawable.setBounds(0, 0, canvas.width, canvas.height)
+			drawable.draw(canvas)
 			return bitmap
 		}
 
@@ -58,28 +49,19 @@ class DrawableBadge private constructor(val context: Context,
 			bitmap = BitmapFactory.decodeResource(res, drawableRes)
 
 			if (bitmap == null) {
-				val d = ResourcesCompat.getDrawable(res, drawableRes, null)?.current
-				if (d is BitmapDrawable) {
-					bitmap = d.bitmap
-				}
-				if (d is VectorDrawable) {
-					bitmap = createBitmapFromVectorDrawable(d)
-				}
-				if (d is InsetDrawable) {
-					bitmap = createBitmapFromInsetDrawable(d)
-				}
+				ResourcesCompat.getDrawable(res, drawableRes, null)
+					?.current
+					?.let {
+						drawable(it)
+					}
 			}
 		}
 
-		fun drawable(drawable: Drawable) = apply {
-			if (drawable is BitmapDrawable) {
-				this.bitmap = drawable.bitmap
-			}
-			if (drawable is VectorDrawable) {
-				this.bitmap = createBitmapFromVectorDrawable(drawable)
-			}
-			if (drawable is InsetDrawable) {
-				this.bitmap = createBitmapFromInsetDrawable(drawable)
+		fun drawable(drawable: Drawable): Builder = apply {
+			val drawableCompat = DrawableCompat.wrap(drawable)
+			bitmap = when (drawableCompat) {
+				is BitmapDrawable -> drawableCompat.bitmap
+				else              -> createBitmapFromDrawable(drawableCompat)
 			}
 		}
 
