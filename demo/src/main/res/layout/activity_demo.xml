@@ -13,29 +13,64 @@
         android:layout_margin="48dp"
         android:src="@mipmap/ic_launcher" />
 
-    <Button
-        android:id="@+id/buttonTopLeft"
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Top Left" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/buttonTopRight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Top Right" />
+        <RadioButton
+            android:id="@+id/radioButtonDrawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Drawable" />
 
-    <Button
-        android:id="@+id/buttonBottomLeft"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bottom Left" />
+        <RadioButton
+            android:id="@+id/radioButtonSelectorDrawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selector Drawable" />
 
-    <Button
-        android:id="@+id/buttonBottomRight"
+        <RadioButton
+            android:id="@+id/radioButtonVectorDrawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vector Drawable" />
+    </RadioGroup>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bottom Right" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonTopLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Top Left" />
+
+        <Button
+            android:id="@+id/buttonTopRight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Top Right" />
+
+        <Button
+            android:id="@+id/buttonBottomLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Bottom Left" />
+
+        <Button
+            android:id="@+id/buttonBottomRight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Bottom Right" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonReset"

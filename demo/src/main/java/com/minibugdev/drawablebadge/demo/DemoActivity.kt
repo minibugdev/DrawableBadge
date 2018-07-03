@@ -23,8 +23,14 @@ class DemoActivity : AppCompatActivity() {
 	}
 
 	private fun drawBadge(number: Int, position: BadgePosition) {
+		val drawableResId = when (radioGroup.checkedRadioButtonId) {
+			R.id.radioButtonSelectorDrawable -> R.drawable.selector_badge
+			R.id.radioButtonVectorDrawable   -> R.drawable.ic_notifications
+			else                             -> R.drawable.ic_launcher
+		}
+
 		DrawableBadge.Builder(applicationContext)
-			.drawableResId(R.drawable.selector_badge)
+			.drawableResId(drawableResId)
 			.badgeColor(R.color.badgeColor)
 			.badgeSize(R.dimen.badge_size)
 			.badgePosition(position)
