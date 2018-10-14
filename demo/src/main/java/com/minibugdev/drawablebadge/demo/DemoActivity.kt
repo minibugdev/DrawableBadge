@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.minibugdev.drawablebadge.BadgePosition
 import com.minibugdev.drawablebadge.DrawableBadge
+import com.minibugdev.drawablebadge.demo.R.id.*
 import kotlinx.android.synthetic.main.activity_demo.*
 
 class DemoActivity : AppCompatActivity() {
