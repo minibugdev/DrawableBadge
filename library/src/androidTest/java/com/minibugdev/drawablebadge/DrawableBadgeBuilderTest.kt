@@ -3,7 +3,7 @@ package com.minibugdev.drawablebadge
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
-import android.support.test.filters.LargeTest
+import androidx.test.filters.LargeTest
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import org.junit.Before

@@ -1,7 +1,7 @@
 package com.minibugdev.drawablebadge.demo
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.minibugdev.drawablebadge.BadgePosition
 import com.minibugdev.drawablebadge.DrawableBadge
 import com.minibugdev.drawablebadge.demo.R.id.*
