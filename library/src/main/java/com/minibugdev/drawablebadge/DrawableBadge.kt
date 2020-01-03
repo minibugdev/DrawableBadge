@@ -4,25 +4,24 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.DimenRes
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.TextPaint
+import android.view.Gravity
+import androidx.annotation.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 
 class DrawableBadge private constructor(val context: Context,
-					@ColorInt val textColor: Int,
-					@ColorInt val badgeColor: Int,
-					@ColorInt val badgeBorderColor: Int,
-					val badgeBorderSize: Float,
-					val badgeSize: Float,
-					val badgePosition: BadgePosition,
-					val bitmap: Bitmap,
-					val isShowBorder: Boolean,
-					val maximumCounter: Int) {
+                                        @ColorInt val textColor: Int,
+                                        @ColorInt val badgeColor: Int,
+                                        @ColorInt val badgeBorderColor: Int,
+                                        val badgeBorderSize: Float,
+                                        val badgeSize: Float,
+                                        val badgeGravity: Int,
+                                        val badgeMargin: Float,
+                                        val bitmap: Bitmap,
+                                        val isShowBorder: Boolean,
+                                        val maximumCounter: Int) {
 
 	class Builder(private val context: Context) {
 
@@ -31,7 +30,8 @@ class DrawableBadge private constructor(val context: Context,
 		@ColorInt private var badgeBorderColor: Int? = null
 		private var badgeBorderSize: Float? = null
 		private var badgeSize: Float? = null
-		private var badgePosition: BadgePosition? = null
+		private var badgeGravity: Int? = null
+		private var badgeMargin: Float? = null
 		private var bitmap: Bitmap? = null
 		private var isShowBorder: Boolean? = null
 		private var maximumCounter: Int? = null
@@ -73,11 +73,28 @@ class DrawableBadge private constructor(val context: Context,
 
 		fun badgeBorderColor(@ColorRes badgeBorderColorRes: Int) = apply { this.badgeBorderColor = ContextCompat.getColor(context, badgeBorderColorRes) }
 
-		fun badgeBorderSize(@DimenRes badgeBorderSize: Int) = apply { this.badgeBorderSize = context.resources.getDimensionPixelOffset(badgeBorderSize).toFloat() }
+		fun badgeBorderSize(@DimenRes badgeBorderSize: Int) = apply {
+			this.badgeBorderSize = context.resources.getDimensionPixelOffset(badgeBorderSize)
+				.toFloat()
+		}
 
-		fun badgeSize(@DimenRes badgeSize: Int) = apply { this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize).toFloat() }
+		fun badgeBorderSize(@Px badgeBorderSize: Float) = apply { this.badgeBorderSize = badgeBorderSize }
 
-		fun badgePosition(badgePosition: BadgePosition) = apply { this.badgePosition = badgePosition }
+		fun badgeSize(@DimenRes badgeSize: Int) = apply {
+			this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize)
+				.toFloat()
+		}
+
+		fun badgeSize(@Px badgeSize: Float) = apply { this.badgeSize = badgeSize }
+
+		fun badgeGravity(badgeGravity: Int) = apply { this.badgeGravity = badgeGravity }
+
+		fun badgeMargin(@DimenRes badgeMargin: Int) = apply {
+			this.badgeMargin = context.resources.getDimensionPixelOffset(badgeMargin)
+				.toFloat()
+		}
+
+		fun badgeMargin(@Px badgeMargin: Float) = apply { this.badgeMargin = badgeMargin }
 
 		fun showBorder(isShowBorder: Boolean) = apply { this.isShowBorder = isShowBorder }
 
@@ -90,21 +107,22 @@ class DrawableBadge private constructor(val context: Context,
 			if (badgeColor == null) badgeColor(R.color.default_badge_color)
 			if (badgeBorderColor == null) badgeBorderColor(R.color.default_badge_border_color)
 			if (badgeBorderSize == null) badgeBorderSize(R.dimen.default_badge_border_size)
-			if (badgePosition == null) badgePosition(BadgePosition.TOP_RIGHT)
+			if (badgeGravity == null) badgeGravity(Gravity.TOP or Gravity.END)
 			if (isShowBorder == null) showBorder(true)
-			if (maximumCounter == null) maximumCounter(DrawableBadge.MAXIMUM_COUNT)
+			if (maximumCounter == null) maximumCounter(MAXIMUM_COUNT)
 
 			return DrawableBadge(
-				context = context,
-				bitmap = bitmap!!,
-				textColor = textColor!!,
-				badgeColor = badgeColor!!,
-				badgeBorderColor = badgeBorderColor!!,
-				badgeBorderSize = badgeBorderSize!!,
-				badgeSize = badgeSize!!,
-				badgePosition = badgePosition!!,
-				isShowBorder = isShowBorder!!,
-				maximumCounter = maximumCounter!!)
+					context = context,
+					bitmap = bitmap!!,
+					textColor = textColor!!,
+					badgeColor = badgeColor!!,
+					badgeBorderColor = badgeBorderColor!!,
+					badgeBorderSize = badgeBorderSize!!,
+					badgeSize = badgeSize!!,
+					badgeGravity = badgeGravity!!,
+					badgeMargin = badgeMargin ?: 0.0f,
+					isShowBorder = isShowBorder!!,
+					maximumCounter = maximumCounter!!)
 		}
 	}
 
@@ -128,15 +146,7 @@ class DrawableBadge private constructor(val context: Context,
 		}
 		canvas.drawBitmap(sourceBitmap, rect, rect, paint)
 
-		val additionalBorderSpace = if (isShowBorder) badgeBorderSize else 0f
-		val widthFloat = width.toFloat()
-		val heightFloat = height.toFloat()
-		val badgeRect = when (badgePosition) {
-			BadgePosition.TOP_LEFT     -> RectF(additionalBorderSpace, additionalBorderSpace, badgeSize, badgeSize)
-			BadgePosition.TOP_RIGHT    -> RectF(widthFloat - badgeSize, additionalBorderSpace, widthFloat - additionalBorderSpace, badgeSize)
-			BadgePosition.BOTTOM_LEFT  -> RectF(additionalBorderSpace, heightFloat - badgeSize, badgeSize, heightFloat - additionalBorderSpace)
-			BadgePosition.BOTTOM_RIGHT -> RectF(widthFloat - badgeSize, heightFloat - badgeSize, widthFloat - additionalBorderSpace, heightFloat - additionalBorderSpace)
-		}
+		val badgeRect = getBadgeRect(rect)
 		canvas.drawOval(badgeRect, paint)
 
 		if (isShowBorder) {
@@ -177,7 +187,17 @@ class DrawableBadge private constructor(val context: Context,
 		return BitmapDrawable(resources, output)
 	}
 
+	private fun getBadgeRect(bound: Rect): RectF {
+		val borderSize = if (isShowBorder) badgeBorderSize else 0f
+		val adjustSpace = borderSize + badgeMargin
+
+		val dest = Rect()
+		val size = badgeSize.toInt()
+		Gravity.apply(badgeGravity, size, size, bound, adjustSpace.toInt(), adjustSpace.toInt(), dest)
+		return RectF(dest)
+	}
+
 	companion object {
-		const val MAXIMUM_COUNT = 99
+		private const val MAXIMUM_COUNT = 99
 	}
 }
