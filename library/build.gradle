@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 
 group = 'com.github.minibugdev'
@@ -65,3 +64,15 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
+
+project.ext {
+    mavDevelopers = ["MB":"MinibugDev"]
+    mavSiteUrl = "https://github.com/minibugdev/DrawableBadge"
+    mavGitUrl = mavSiteUrl + '.git'
+    mavProjectName = 'DrawableBadge'
+    mavPublishToInternalRepo = true
+    mavRepoInternalUrl = "com/minibugdev/DrawableBadge"
+    mavLibraryLicenses = ["MIT License":'https://opensource.org/licenses/MIT']
+    mavLibraryDescription = "Drawable Badge is a android library for adding badges to drawables."
+}
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle'
