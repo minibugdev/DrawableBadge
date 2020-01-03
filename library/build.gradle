@@ -39,9 +39,6 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testImplementation "io.mockk:mockk-android:$mockk_version"
-    testImplementation "androidx.annotation:annotation:$android_annotation_version"
-    testImplementation "androidx.test:runner:$test_runner_version"
     testImplementation "org.robolectric:robolectric:$robolectric_version"
 }
 
