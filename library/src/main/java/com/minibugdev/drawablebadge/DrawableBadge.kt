@@ -6,10 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.view.Gravity
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -85,10 +82,14 @@ class DrawableBadge private constructor(val context: Context,
 				.toFloat()
 		}
 
+		fun badgeBorderSize(@Px badgeBorderSize: Float) = apply { this.badgeBorderSize = badgeBorderSize }
+
 		fun badgeSize(@DimenRes badgeSize: Int) = apply {
 			this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize)
 				.toFloat()
 		}
+
+		fun badgeSize(@Px badgeSize: Float) = apply { this.badgeSize = badgeSize }
 
 		@Deprecated("Move to Gravity")
 		fun badgePosition(badgePosition: BadgePosition) = apply { this.badgePosition = badgePosition }
@@ -99,6 +100,8 @@ class DrawableBadge private constructor(val context: Context,
 			this.badgeMargin = context.resources.getDimensionPixelOffset(badgeMargin)
 				.toFloat()
 		}
+
+		fun badgeMargin(@Px badgeMargin: Float) = apply { this.badgeMargin = badgeMargin }
 
 		fun showBorder(isShowBorder: Boolean) = apply { this.isShowBorder = isShowBorder }
 

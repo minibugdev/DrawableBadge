@@ -87,6 +87,24 @@ class DrawableBadgeBuilderTest {
 		assertEquals(50, actual.maximumCounter)
 	}
 
+	@Test
+	fun testCustomConfigSizeInPx() {
+		every { mockContext.getColor(R.color.default_badge_color) } returns EXPECTED_DEFAULT_BADGE_COLOR_INT
+		every { mockContext.getColor(R.color.default_badge_border_color) } returns EXPECTED_DEFAULT_BADGE_BORDER_COLOR_INT
+		every { mockContext.getColor(R.color.default_badge_text_color) } returns EXPECTED_DEFAULT_BADGE_TEXT_COLOR_INT
+
+		val actual = drawableBuilder
+			.bitmap(Bitmap.createBitmap(128, 128, Bitmap.Config.ALPHA_8))
+			.badgeSize(10f)
+			.badgeBorderSize(20f)
+			.badgeMargin(30f)
+			.build()
+
+		assertEquals(10f, actual.badgeSize)
+		assertEquals(20f, actual.badgeBorderSize)
+		assertEquals(30f, actual.badgeMargin)
+	}
+
 	companion object {
 		private const val EXPECTED_DEFAULT_BADGE_SIZE = 100f
 		private const val EXPECTED_DEFAULT_BADGE_BORDER_SIZE = 200f

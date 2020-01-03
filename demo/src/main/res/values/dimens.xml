@@ -2,5 +2,4 @@
 <resources>
     <dimen name="badge_size">16dp</dimen>
     <dimen name="badge_border_size">2dp</dimen>
-    <dimen name="badge_margin">4dp</dimen>
 </resources>

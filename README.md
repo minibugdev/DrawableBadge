@@ -35,12 +35,12 @@ imageViewBadge.setImageDrawable(drawable)
 - `bitmap`: Bitmap to added badges.
 - `textColor`: Badge text color resource id, default `#FFFFFF`.
 - `badgeColor`: Badge color resource id , default `#FF0000`.
-- `badgeSize`: Badge size dimension id, default `16dp`.
+- `badgeSize`: Badge size supported `@DimenRes` or `@Px`, default `16dp`.
 - `badgeGravity`: Position of badge by [Android Gravity](https://developer.android.com/reference/android/view/Gravity) which need to added. default `Gravity.TOP or Gravity.END`.
-- `badgeMargin`: Badge margin dimension id, default `0`.
+- `badgeMargin`: Badge margin supported `@DimenRes` or `@Px`, default `0`.
 - `showBorder`: Set visible of badge border, default `true`.
 - `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
-- `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.
+- `badgeBorderSize`: Badge border size supported `@DimenRes` or `@Px`, default `0.5dp`.
 - `maximumCounter`: Maximum counter text will append with `+`, default and not more than `99`.
 
 #### Deprecated

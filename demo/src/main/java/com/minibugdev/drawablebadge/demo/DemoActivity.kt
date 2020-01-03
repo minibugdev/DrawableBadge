@@ -36,12 +36,12 @@ class DemoActivity : AppCompatActivity() {
 			.badgeColor(R.color.badgeColor)
 			.badgeSize(R.dimen.badge_size)
 			.badgeGravity(gravity)
-			.badgeMargin(R.dimen.badge_margin)
 			.textColor(R.color.textColor)
 			.showBorder(true)
 			.badgeBorderColor(R.color.borderColor)
 			.badgeBorderSize(R.dimen.badge_border_size)
 			.maximumCounter(99)
+			.badgeMargin(10f)
 			.build()
 			.get(number)
 			.let { drawable -> imageViewBadge.setImageDrawable(drawable) }
