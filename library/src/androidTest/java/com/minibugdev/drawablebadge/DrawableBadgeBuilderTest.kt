@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import androidx.test.filters.LargeTest
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -15,12 +15,12 @@ import kotlin.test.assertFailsWith
 class DrawableBadgeBuilderTest {
 
 	private lateinit var drawableBuilder: DrawableBadge.Builder
-	private val mockContext: Context = mock()
-	private val mockResource: Resources = mock()
+	private val mockContext: Context = mockk()
+	private val mockResource: Resources = mockk()
 
 	@Before
 	fun setup() {
-		whenever(mockContext.resources).thenReturn(mockResource)
+		every { mockContext.resources } returns mockResource
 		drawableBuilder = DrawableBadge.Builder(mockContext)
 	}
 
@@ -33,11 +33,11 @@ class DrawableBadgeBuilderTest {
 
 	@Test
 	fun testConfigOnlyBitmapShouldUsingDefaultConfig() {
-		whenever(mockResource.getColor(R.color.default_badge_color)).thenReturn(EXPECTED_DEFAULT_BADGE_COLOR_INT)
-		whenever(mockResource.getColor(R.color.default_badge_border_color)).thenReturn(EXPECTED_DEFAULT_BADGE_BORDER_COLOR_INT)
-		whenever(mockResource.getColor(R.color.default_badge_text_color)).thenReturn(EXPECTED_DEFAULT_BADGE_TEXT_COLOR_INT)
-		whenever(mockResource.getDimensionPixelOffset(R.dimen.default_badge_size)).thenReturn(EXPECTED_DEFAULT_BADGE_SIZE.toInt())
-		whenever(mockResource.getDimensionPixelOffset(R.dimen.default_badge_border_size)).thenReturn(EXPECTED_DEFAULT_BADGE_BORDER_SIZE.toInt())
+		every { mockContext.getColor(R.color.default_badge_color) } returns EXPECTED_DEFAULT_BADGE_COLOR_INT
+		every { mockContext.getColor(R.color.default_badge_border_color) } returns EXPECTED_DEFAULT_BADGE_BORDER_COLOR_INT
+		every { mockContext.getColor(R.color.default_badge_text_color) } returns EXPECTED_DEFAULT_BADGE_TEXT_COLOR_INT
+		every { mockResource.getDimensionPixelOffset(R.dimen.default_badge_size) } returns EXPECTED_DEFAULT_BADGE_SIZE.toInt()
+		every { mockResource.getDimensionPixelOffset(R.dimen.default_badge_border_size) } returns EXPECTED_DEFAULT_BADGE_BORDER_SIZE.toInt()
 
 		val actual = drawableBuilder
 			.bitmap(Bitmap.createBitmap(128, 128, Bitmap.Config.ALPHA_8))
@@ -55,11 +55,11 @@ class DrawableBadgeBuilderTest {
 
 	@Test
 	fun testCustomConfigShouldUsingCustomConfig() {
-		whenever(mockResource.getColor(FAKE_BADGE_COLOR_RES_ID)).thenReturn(EXPECTED_CONFIG_BADGE_COLOR_INT)
-		whenever(mockResource.getColor(FAKE_BADGE_BORDER_COLOR_RES_ID)).thenReturn(EXPECTED_CONFIG_BADGE_BORDER_COLOR_INT)
-		whenever(mockResource.getColor(FAKE_TEXT_COLOR_RES_ID)).thenReturn(EXPECTED_CONFIG_BADGE_TEXT_COLOR_INT)
-		whenever(mockResource.getDimensionPixelOffset(FAKE_BADGE_SIZE_DIMENSION_ID)).thenReturn(EXPECTED_CONFIG_BADGE_SIZE.toInt())
-		whenever(mockResource.getDimensionPixelOffset(FAKE_BADGE_BORDER_SIZE_DIMENSION_ID)).thenReturn(EXPECTED_CONFIG_BADGE_BORDER_SIZE.toInt())
+		every { mockContext.getColor(FAKE_BADGE_COLOR_RES_ID) } returns EXPECTED_CONFIG_BADGE_COLOR_INT
+		every { mockContext.getColor(FAKE_BADGE_BORDER_COLOR_RES_ID) } returns EXPECTED_CONFIG_BADGE_BORDER_COLOR_INT
+		every { mockContext.getColor(FAKE_TEXT_COLOR_RES_ID) } returns EXPECTED_CONFIG_BADGE_TEXT_COLOR_INT
+		every { mockResource.getDimensionPixelOffset(FAKE_BADGE_SIZE_DIMENSION_ID) } returns EXPECTED_CONFIG_BADGE_SIZE.toInt()
+		every { mockResource.getDimensionPixelOffset(FAKE_BADGE_BORDER_SIZE_DIMENSION_ID) } returns EXPECTED_CONFIG_BADGE_BORDER_SIZE.toInt()
 
 		val actual = drawableBuilder
 			.bitmap(Bitmap.createBitmap(128, 128, Bitmap.Config.ALPHA_8))

@@ -5,7 +5,7 @@ buildscript {
 
     ext.test_runner_version = '1.2.0'
     ext.junit_version = '4.12'
-    ext.mockito_version = '2.1.0'
+    ext.mockk_version = '1.9.2'
 
     repositories {
         jcenter()
