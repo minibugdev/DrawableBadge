@@ -1,8 +1,8 @@
 package com.minibugdev.drawablebadge.demo
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
-import com.minibugdev.drawablebadge.BadgePosition
 import com.minibugdev.drawablebadge.DrawableBadge
 import kotlinx.android.synthetic.main.activity_demo.*
 
@@ -15,14 +15,16 @@ class DemoActivity : AppCompatActivity() {
 	}
 
 	private fun registerEvents() {
-		buttonTopLeft.setOnClickListener { drawBadge(1, BadgePosition.TOP_LEFT) }
-		buttonTopRight.setOnClickListener { drawBadge(50, BadgePosition.TOP_RIGHT) }
-		buttonBottomLeft.setOnClickListener { drawBadge(99, BadgePosition.BOTTOM_LEFT) }
-		buttonBottomRight.setOnClickListener { drawBadge(100, BadgePosition.BOTTOM_RIGHT) }
-		buttonReset.setOnClickListener { drawBadge(0, BadgePosition.TOP_LEFT) }
+		buttonTopLeft.setOnClickListener { drawBadge(1, Gravity.TOP or Gravity.START) }
+		buttonTopRight.setOnClickListener { drawBadge(50, Gravity.TOP or Gravity.END) }
+		buttonBottomLeft.setOnClickListener { drawBadge(99, Gravity.BOTTOM or Gravity.START) }
+		buttonBottomRight.setOnClickListener { drawBadge(100, Gravity.BOTTOM or Gravity.END) }
+		buttonCenterHorizontal.setOnClickListener { drawBadge(100, Gravity.CENTER_HORIZONTAL or Gravity.TOP) }
+		buttonCenterVertical.setOnClickListener { drawBadge(100, Gravity.CENTER_VERTICAL or Gravity.START) }
+		buttonReset.setOnClickListener { drawBadge(0, Gravity.TOP or Gravity.END) }
 	}
 
-	private fun drawBadge(number: Int, position: BadgePosition) {
+	private fun drawBadge(number: Int, gravity: Int) {
 		val drawableResId = when (radioGroup.checkedRadioButtonId) {
 			R.id.radioButtonSelectorDrawable -> R.drawable.selector_badge
 			R.id.radioButtonVectorDrawable   -> R.drawable.ic_notifications
@@ -33,7 +35,7 @@ class DemoActivity : AppCompatActivity() {
 			.drawableResId(drawableResId)
 			.badgeColor(R.color.badgeColor)
 			.badgeSize(R.dimen.badge_size)
-			.badgePosition(position)
+			.badgeGravity(gravity)
 			.textColor(R.color.textColor)
 			.showBorder(true)
 			.badgeBorderColor(R.color.borderColor)

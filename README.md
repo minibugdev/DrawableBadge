@@ -14,7 +14,7 @@ val drawable = DrawableBadge.Builder(context)
     .drawableResId(R.mipmap.ic_launcher_round)
     .badgeColor(R.color.badgeColor)
     .badgeSize(R.dimen.badge_size)
-    .badgePosition(BadgePosition.TOP_RIGHT)
+    .badgeGravity(Gravity.CENTER_VERTICAL or Gravity.Start)
     .textColor(R.color.textColor)
     .showBorder(true)
     .badgeBorderColor(R.color.badgeBorderColor)
@@ -35,11 +35,14 @@ imageViewBadge.setImageDrawable(drawable)
 - `textColor`: Badge text color resource id, default `#FFFFFF`.
 - `badgeColor`: Badge color resource id , default `#FF0000`.
 - `badgeSize`: Badge size dimension id, default `16dp`.
-- `badgePosition`: Position of Badge which need to added. (`TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_RIGHT`, `BOTTOM_LEFT`), default `TOP_RIGHT`.
+- `badgeGravity`: Position of badge by [Android Gravity](https://developer.android.com/reference/android/view/Gravity) which need to added. default `Gravity.TOP or Gravity.END`.
 - `showBorder`: Set visible of badge border, default `true`.
 - `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
 - `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.
 - `maximumCounter`: Maximum counter text will append with `+`, default and not more than `99`.
+
+#### Deprecated
+- `badgePosition`: Position of Badge which need to added.
 
 ## Download
 ``` groovy

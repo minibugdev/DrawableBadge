@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center"
+	android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageViewBadge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="48dp"
-        android:src="@mipmap/ic_launcher" />
+	<ImageView
+		android:id="@+id/imageViewBadge"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="48dp"
+		android:src="@mipmap/ic_launcher" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+	<RadioGroup
+		android:id="@+id/radioGroup"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
         <RadioButton
             android:id="@+id/radioButtonDrawable"
@@ -71,6 +71,26 @@
             android:layout_weight="1"
             android:text="Bottom Right" />
     </LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/buttonCenterVertical"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="Center Vertical" />
+
+		<Button
+			android:id="@+id/buttonCenterHorizontal"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="Center Horizontal" />
+	</LinearLayout>
 
     <Button
         android:id="@+id/buttonReset"
