@@ -15,6 +15,7 @@ val drawable = DrawableBadge.Builder(context)
     .badgeColor(R.color.badgeColor)
     .badgeSize(R.dimen.badge_size)
     .badgeGravity(Gravity.CENTER_VERTICAL or Gravity.Start)
+    .badgeMargin(R.dimen.badge_margin)
     .textColor(R.color.textColor)
     .showBorder(true)
     .badgeBorderColor(R.color.badgeBorderColor)
@@ -36,6 +37,7 @@ imageViewBadge.setImageDrawable(drawable)
 - `badgeColor`: Badge color resource id , default `#FF0000`.
 - `badgeSize`: Badge size dimension id, default `16dp`.
 - `badgeGravity`: Position of badge by [Android Gravity](https://developer.android.com/reference/android/view/Gravity) which need to added. default `Gravity.TOP or Gravity.END`.
+- `badgeMargin`: Badge margin dimension id, default `0`.
 - `showBorder`: Set visible of badge border, default `true`.
 - `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
 - `badgeBorderSize`: Badge border size dimension id, default `0.5dp`.

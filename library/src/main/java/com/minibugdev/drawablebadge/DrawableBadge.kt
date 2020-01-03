@@ -22,6 +22,7 @@ class DrawableBadge private constructor(val context: Context,
                                         val badgeSize: Float,
                                         val badgePosition: BadgePosition?,
                                         val badgeGravity: Int,
+                                        val badgeMargin: Float,
                                         val bitmap: Bitmap,
                                         val isShowBorder: Boolean,
                                         val maximumCounter: Int) {
@@ -34,6 +35,7 @@ class DrawableBadge private constructor(val context: Context,
 		private var badgeBorderSize: Float? = null
 		private var badgeSize: Float? = null
 		private var badgeGravity: Int? = null
+		private var badgeMargin: Float? = null
 		private var bitmap: Bitmap? = null
 		private var isShowBorder: Boolean? = null
 		private var maximumCounter: Int? = null
@@ -93,6 +95,11 @@ class DrawableBadge private constructor(val context: Context,
 
 		fun badgeGravity(badgeGravity: Int) = apply { this.badgeGravity = badgeGravity }
 
+		fun badgeMargin(@DimenRes badgeMargin: Int) = apply {
+			this.badgeMargin = context.resources.getDimensionPixelOffset(badgeMargin)
+				.toFloat()
+		}
+
 		fun showBorder(isShowBorder: Boolean) = apply { this.isShowBorder = isShowBorder }
 
 		fun maximumCounter(maximumCounter: Int) = apply { this.maximumCounter = maximumCounter }
@@ -118,6 +125,7 @@ class DrawableBadge private constructor(val context: Context,
 					badgeSize = badgeSize!!,
 					badgePosition = badgePosition,
 					badgeGravity = badgeGravity!!,
+					badgeMargin = badgeMargin ?: 0.0f,
 					isShowBorder = isShowBorder!!,
 					maximumCounter = maximumCounter!!)
 		}
@@ -188,20 +196,20 @@ class DrawableBadge private constructor(val context: Context,
 
 	private fun getBadgeRect(bound: Rect, width: Float, height: Float): RectF {
 		val borderSize = if (isShowBorder) badgeBorderSize else 0f
+		val adjustSpace = borderSize + badgeMargin
 
 		return if (badgePosition != null) {
 			when (badgePosition) {
-				BadgePosition.TOP_LEFT     -> RectF(borderSize, borderSize, badgeSize, badgeSize)
-				BadgePosition.TOP_RIGHT    -> RectF(width - badgeSize, borderSize, width - borderSize, badgeSize)
-				BadgePosition.BOTTOM_LEFT  -> RectF(borderSize, height - badgeSize, badgeSize, height - borderSize)
-				BadgePosition.BOTTOM_RIGHT -> RectF(width - badgeSize, height - badgeSize, width - borderSize, height - borderSize)
+				BadgePosition.TOP_LEFT     -> RectF(adjustSpace, adjustSpace, badgeSize, badgeSize)
+				BadgePosition.TOP_RIGHT    -> RectF(width - badgeSize, adjustSpace, width - adjustSpace, badgeSize)
+				BadgePosition.BOTTOM_LEFT  -> RectF(adjustSpace, height - badgeSize, badgeSize, height - adjustSpace)
+				BadgePosition.BOTTOM_RIGHT -> RectF(width - badgeSize, height - badgeSize, width - adjustSpace, height - adjustSpace)
 			}
 		}
 		else {
 			val dest = Rect()
 			val size = badgeSize.toInt()
-			val border = borderSize.toInt()
-			Gravity.apply(badgeGravity, size, size, bound, border, border, dest)
+			Gravity.apply(badgeGravity, size, size, bound, adjustSpace.toInt(), adjustSpace.toInt(), dest)
 			RectF(dest)
 		}
 	}

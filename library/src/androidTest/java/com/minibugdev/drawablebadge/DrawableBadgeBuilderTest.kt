@@ -48,7 +48,8 @@ class DrawableBadgeBuilderTest {
 		assertEquals(EXPECTED_DEFAULT_BADGE_COLOR_INT, actual.badgeColor)
 		assertEquals(EXPECTED_DEFAULT_BADGE_BORDER_COLOR_INT, actual.badgeBorderColor)
 		assertEquals(EXPECTED_DEFAULT_BADGE_TEXT_COLOR_INT, actual.textColor)
-		assertEquals(BadgePosition.TOP_RIGHT, actual.badgePosition)
+		assertEquals(EXPECTED_DEFAULT_BADGE_MARGIN, actual.badgeMargin)
+		assertEquals(null, actual.badgePosition)
 		assertEquals(true, actual.isShowBorder)
 		assertEquals(99, actual.maximumCounter)
 	}
@@ -60,6 +61,7 @@ class DrawableBadgeBuilderTest {
 		every { mockContext.getColor(FAKE_TEXT_COLOR_RES_ID) } returns EXPECTED_CONFIG_BADGE_TEXT_COLOR_INT
 		every { mockResource.getDimensionPixelOffset(FAKE_BADGE_SIZE_DIMENSION_ID) } returns EXPECTED_CONFIG_BADGE_SIZE.toInt()
 		every { mockResource.getDimensionPixelOffset(FAKE_BADGE_BORDER_SIZE_DIMENSION_ID) } returns EXPECTED_CONFIG_BADGE_BORDER_SIZE.toInt()
+		every { mockResource.getDimensionPixelOffset(FAKE_BADGE_MARGIN_RES_ID) } returns EXPECTED_CONFIG_BADGE_MARGIN.toInt()
 
 		val actual = drawableBuilder
 			.bitmap(Bitmap.createBitmap(128, 128, Bitmap.Config.ALPHA_8))
@@ -69,6 +71,7 @@ class DrawableBadgeBuilderTest {
 			.badgeBorderColor(FAKE_BADGE_BORDER_COLOR_RES_ID)
 			.textColor(FAKE_TEXT_COLOR_RES_ID)
 			.badgePosition(BadgePosition.BOTTOM_LEFT)
+			.badgeMargin(FAKE_BADGE_MARGIN_RES_ID)
 			.showBorder(false)
 			.maximumCounter(50)
 			.build()
@@ -78,6 +81,7 @@ class DrawableBadgeBuilderTest {
 		assertEquals(EXPECTED_CONFIG_BADGE_COLOR_INT, actual.badgeColor)
 		assertEquals(EXPECTED_CONFIG_BADGE_BORDER_COLOR_INT, actual.badgeBorderColor)
 		assertEquals(EXPECTED_CONFIG_BADGE_TEXT_COLOR_INT, actual.textColor)
+		assertEquals(EXPECTED_CONFIG_BADGE_MARGIN, actual.badgeMargin)
 		assertEquals(BadgePosition.BOTTOM_LEFT, actual.badgePosition)
 		assertEquals(false, actual.isShowBorder)
 		assertEquals(50, actual.maximumCounter)
@@ -89,17 +93,20 @@ class DrawableBadgeBuilderTest {
 		private const val EXPECTED_DEFAULT_BADGE_COLOR_INT = 1
 		private const val EXPECTED_DEFAULT_BADGE_BORDER_COLOR_INT = 2
 		private const val EXPECTED_DEFAULT_BADGE_TEXT_COLOR_INT = 3
+		private const val EXPECTED_DEFAULT_BADGE_MARGIN = 0.0f
 
 		private const val EXPECTED_CONFIG_BADGE_SIZE = 300f
 		private const val EXPECTED_CONFIG_BADGE_BORDER_SIZE = 400f
 		private const val EXPECTED_CONFIG_BADGE_COLOR_INT = 4
 		private const val EXPECTED_CONFIG_BADGE_BORDER_COLOR_INT = 5
 		private const val EXPECTED_CONFIG_BADGE_TEXT_COLOR_INT = 6
+		private const val EXPECTED_CONFIG_BADGE_MARGIN = 16.0f
 
 		private const val FAKE_BADGE_SIZE_DIMENSION_ID = 100
 		private const val FAKE_BADGE_BORDER_SIZE_DIMENSION_ID = 101
 		private const val FAKE_BADGE_COLOR_RES_ID = 102
 		private const val FAKE_BADGE_BORDER_COLOR_RES_ID = 103
 		private const val FAKE_TEXT_COLOR_RES_ID = 104
+		private const val FAKE_BADGE_MARGIN_RES_ID = 105
 	}
 }
