@@ -26,7 +26,10 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
     }
     testOptions {
-        unitTests.returnDefaultValues = true
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -34,11 +37,12 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$androidx_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
-    androidTestImplementation "androidx.annotation:annotation:$android_annotation_version"
-    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "io.mockk:mockk-android:$mockk_version"
+    testImplementation "androidx.annotation:annotation:$android_annotation_version"
+    testImplementation "androidx.test:runner:$test_runner_version"
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
 }
 
 // build a jar with source files

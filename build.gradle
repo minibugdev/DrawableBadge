@@ -6,6 +6,7 @@ buildscript {
     ext.test_runner_version = '1.2.0'
     ext.junit_version = '4.12'
     ext.mockk_version = '1.9.2'
+    ext.robolectric_version = '4.3.1'
 
     repositories {
         jcenter()

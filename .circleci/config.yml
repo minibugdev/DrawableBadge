@@ -6,31 +6,6 @@ jobs:
     environment:
       - JVM_OPTS: -Xmx3200m
     steps:
-      - run:
-          name: Install custom system image
-          command: sdkmanager "system-images;android-21;default;armeabi-v7a"
-          environment:
-            TERM: dumb
-      - run:
-          name: Create avd
-          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-21;default;armeabi-v7a"
-          environment:
-            TERM: dumb
-      - run:
-          name: Start emulator
-          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd testEmulator -noaudio -no-boot-anim -no-window -accel on
-          background: true
-          environment:
-            TERM: dumb
-      - checkout
-      - run:
-          name: Wait for emulator
-          command: |
-            circle-android wait-for-boot
-            sleep 30
-            adb shell input keyevent 82
-          environment:
-            TERM: dumb
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "library/build.gradle" }}
       - run:
@@ -42,7 +17,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "library/build.gradle" }}
       - run:
           name: Run Tests
-          command: ./gradlew :library:connectedAndroidTest
+          command: ./gradlew :library:test
       - store_artifacts:
           path: library/build/reports
           destination: reports
