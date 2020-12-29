@@ -1,6 +1,6 @@
 # Drawable Badge
 [![CircleCI](https://circleci.com/gh/minibugdev/DrawableBadge.svg?style=shield)](https://circleci.com/gh/minibugdev/DrawableBadge)
-[![Release](https://jitpack.io/v/minibugdev/DrawableBadge.svg)](https://jitpack.io/#minibugdev/DrawableBadge/2.0.0)
+[![Release](https://jitpack.io/v/minibugdev/DrawableBadge.svg)](https://jitpack.io/#minibugdev/DrawableBadge/2.0.1)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/minibugdev/DrawableBadge/master/LICENSE)
 
 Drawable Badge is a android library for adding badges to drawables.
@@ -21,6 +21,7 @@ val drawable = DrawableBadge.Builder(context)
     .badgeBorderColor(R.color.badgeBorderColor)
     .badgeBorderSize(R.dimen.badge_border_size)
     .maximumCounter(99)
+    .showCounter(true)
     .build()
     .get(99)
 ```
@@ -42,6 +43,7 @@ imageViewBadge.setImageDrawable(drawable)
 - `badgeBorderColor`: Badge border color resource id , default `#FFFFFF`.
 - `badgeBorderSize`: Badge border size supported `@DimenRes` or `@Px`, default `0.5dp`.
 - `maximumCounter`: Maximum counter text will append with `+`, default and not more than `99`.
+- `showCounter`: Set visible of badge counter number, default `true`.
 
 #### Deprecated
 - `badgePosition`: Position of Badge which need to added.
@@ -54,7 +56,7 @@ repositories {
 ```
 
 ``` groovy
-compile 'com.github.minibugdev:drawablebadge:2.0.0'
+compile 'com.github.minibugdev:drawablebadge:2.0.1'
 ```
 
 

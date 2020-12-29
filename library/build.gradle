@@ -5,14 +5,14 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.minibugdev'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 29
-        versionCode 5
-        versionName "2.0.0"
+        targetSdkVersion 30
+        versionCode 6
+        versionName "2.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

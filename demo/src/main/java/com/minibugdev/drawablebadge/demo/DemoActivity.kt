@@ -42,6 +42,7 @@ class DemoActivity : AppCompatActivity() {
 			.badgeBorderSize(R.dimen.badge_border_size)
 			.maximumCounter(99)
 			.badgeMargin(10f)
+			.showCounter(true)
 			.build()
 			.get(number)
 			.let { drawable -> imageViewBadge.setImageDrawable(drawable) }
