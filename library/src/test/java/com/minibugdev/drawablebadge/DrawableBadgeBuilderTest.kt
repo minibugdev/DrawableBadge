@@ -68,6 +68,7 @@ class DrawableBadgeBuilderTest {
 			.badgeGravity(Gravity.CENTER_VERTICAL or Gravity.END)
 			.showBorder(false)
 			.maximumCounter(50)
+			.showCounter(false)
 			.build()
 
 		val expectedBadgeColor = ContextCompat.getColor(context, android.R.color.holo_red_dark)
@@ -83,5 +84,6 @@ class DrawableBadgeBuilderTest {
 		assertEquals(Gravity.CENTER_VERTICAL or Gravity.END, actual.badgeGravity)
 		assertEquals(false, actual.isShowBorder)
 		assertEquals(50, actual.maximumCounter)
+		assertEquals(false, actual.isShowCounter)
 	}
 }
